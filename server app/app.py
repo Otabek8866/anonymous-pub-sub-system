@@ -58,9 +58,14 @@ def get_id():
    
     global database
 
+    #checking database before calculating dot product
+    check_db = len(database.keys())
+    if check_db == 0:
+        return "No message found"
+
     # getting the ID and converting to list 
     id_string = request.args.get('ID')
-    print("Size of the received ID:", id_string)
+    print("Size of the received ID:", len(id_string))
     id_int_list = json.loads(id_string)
     
     #Converting the ID to bipolar format
@@ -84,7 +89,8 @@ def get_id():
 
     #Retrieving the data and sending back to client
     target_data_key = my_list[my_index]
-    print("Size of the retrieved data:", len(database.get(target_data_key)))
+    target_data = database.get(target_data_key)
+    print("Size of the found message:", len(target_data))
 
     return database.get(target_data_key)
 
@@ -102,8 +108,27 @@ def refine_id(retrieved_id):
     return idVectorBinary
 
 
+#populate the main_db dictionary after restart
+def populate_db():
+
+    #reading files in database folder
+    db_files = os.listdir('database/')
+    num_files = len(db_files)
+
+    if num_files > 0:    
+        for item in db_files:
+            temp_file = open('database/' + item, "rb")
+            output = pickle.load(temp_file)
+
+            #updating the database dictionary
+            database.update(output)
+
+        msg_count = num_files
+
+        print("Database was populated successfully")          
+
 
 #Starting the web server
-
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=80)
+    populate_db()    
+    app.run()
