@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 
-host = "http://localhost:80"
+host = "http://localhost:5000"
 
 @app.route('/')
 def index():
@@ -36,14 +36,29 @@ def getData():
     idList = request.args.get('data')
     
     response = decoder.retrieve_data(host + "/sub", idList)
+
+    if response == "No message found":
+        return "No message found"
+    
+    print("Printing Response...")
+    # print(response)
+    print("----------------------")
+
     response_list = json.loads(response)
+    # print(response_list)
 
     id_refined = decoder.refine_id(json.loads(idList))
-    org_msg = decoder.get_original_msg(response_list, id_refined)
-    print("Original Message..")
-    print(org_msg)
+    # print(id_refined)
 
-    return org_msg
+    try:
+
+        org_msg = decoder.get_original_msg(response_list, id_refined)
+        # print("Original Message..")
+        print(org_msg)
+
+        return org_msg
+    except:
+        return "No Corresponding ID found"
 
 @app.route('/post', methods=['POST'])
 def postData():
