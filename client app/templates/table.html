@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V01</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="static/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="static/table/css/main.css">
+
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+				<div class="table100">
+					<table >
+						<thead>
+							<tr class="table100-head">
+								<th class="column1 ">Index</th>
+								<th class="column2">Data</th>
+
+							</tr>
+						</thead>
+						<tbody>
+
+							{%for i in range(0, len)%}
+							<tr>
+								<td class="column1">{{i}}</td>
+								<td class="column2">{{Data[i]}}</td>
+							</tr>
+							{%endfor%}
+								
+								
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
