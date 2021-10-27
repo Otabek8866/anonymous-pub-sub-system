@@ -4,16 +4,27 @@ import pickle
 import numpy as np
 import os
 
-# from __future__ import print_function
-# import sys
-app = Flask(__name__)
+
+# overriding Flask class to add extra functionality 
+class MyFlaskApp(Flask):
+  def run(self, host=None, port=None, debug=None, load_dotenv=True, **options):
+    if not self.debug or os.getenv('WERKZEUG_RUN_MAIN') == 'true':
+      with self.app_context():
+
+        # Extra functionality
+        populate_db()
+
+    super(MyFlaskApp, self).run(host=host, port=port, debug=debug, load_dotenv=load_dotenv, **options)
+
+# creating the MyFlaskApp application
+app = MyFlaskApp(__name__)
+
 
 #Creating python dictionary as database
 database = {}
 
 #Creating indexes for msgs
 msg_count = 1
-Path = os.getcwd()
 
 
 #Default web page response
@@ -40,7 +51,7 @@ def my_form_post():
     print("Received data size:", len(data_list))
 
     #Storing the data in a pickle file
-    temp_db = open(Path + "\database\msg_" + str(msg_count) + ".pkl", "wb")
+    temp_db = open("/var/www/webserver/database/msg_" + str(msg_count) + ".pkl", "wb")
     pickle.dump({key: str(data_list)}, temp_db)
     temp_db.close()
     msg_count = msg_count + 1
@@ -112,12 +123,12 @@ def refine_id(retrieved_id):
 def populate_db():
 
     #reading files in database folder
-    db_files = os.listdir('database/')
+    db_files = os.listdir('/var/www/webserver/database/')
     num_files = len(db_files)
 
     if num_files > 0:    
         for item in db_files:
-            temp_file = open('database/' + item, "rb")
+            temp_file = open('/var/www/webserver/database/' + item, "rb")
             output = pickle.load(temp_file)
 
             #updating the database dictionary
@@ -130,5 +141,4 @@ def populate_db():
 
 #Starting the web server
 if __name__ == '__main__':
-    populate_db()    
     app.run()
