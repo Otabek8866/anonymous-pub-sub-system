@@ -6,8 +6,8 @@ import os
 
 
 #defining the path for server
-path_dir = "/var/www/webserver/"
-
+#path_dir = "/var/www/webserver/"
+path_dir = "/home/ubuntu/anonymous_pub_sub_system/server app/"
 
 #populate the main_db dictionary after restart
 def populate_db():
