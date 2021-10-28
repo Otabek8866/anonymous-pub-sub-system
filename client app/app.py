@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 
 
-host = "http://localhost:5000"
+host = "http://18.118.151.217:5000"
 
 @app.route('/')
 def index():
@@ -51,12 +51,13 @@ def getData():
     # print(id_refined)
 
     try:
-
+        id_refined = decoder.refine_id(json.loads(idList))
+        # print(id_refined)
         org_msg = decoder.get_original_msg(response_list, id_refined)
         # print("Original Message..")
         print(org_msg)
-
         return org_msg
+        
     except:
         return "No Corresponding ID found"
 
