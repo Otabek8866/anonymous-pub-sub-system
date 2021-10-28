@@ -82,6 +82,8 @@ def my_form_post():
 def get_id():
    
     global database
+    
+    start = time.time()
 
     #checking database before calculating dot product
     check_db = len(database.keys())
@@ -107,10 +109,7 @@ def get_id():
         final_list.append(json.loads(item))
 
     #Calculating the dot product
-    start = time.time()
     dot_prod = list(np.dot(final_list, ID))
-    end = time.time()
-    print("Dot Prod Calculation time: {:.20f}".format(end-start))
     
     my_list = []
     for i in final_list:
@@ -125,6 +124,9 @@ def get_id():
     target_data_key = my_list[my_index]
     target_data = database.get(target_data_key)
     print("Size of the found message:", len(target_data))
+    
+    end = time.time()
+    print("Time to process a request: {:.20f}".format(end-start))
 
     return database.get(target_data_key)
 
