@@ -3,11 +3,12 @@ import json
 import pickle
 import numpy as np
 import os
+import time
 
 
 #defining the path for server
-path_dir = "/var/www/webserver/"
-
+#path_dir = "/var/www/webserver/"
+path_dir = "/home/ubuntu/anonymous_pub_sub_system/server app/"
 
 #populate the main_db dictionary after restart
 def populate_db():
@@ -106,7 +107,11 @@ def get_id():
         final_list.append(json.loads(item))
 
     #Calculating the dot product
+    start = time.time()
     dot_prod = list(np.dot(final_list, ID))
+    end = time.time()
+    print("Dot Prod Calculation time: {:.20f}".format(end-start))
+    
     my_list = []
     for i in final_list:
         my_list.append(str(i))
