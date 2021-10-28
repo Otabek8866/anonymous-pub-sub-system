@@ -39,6 +39,9 @@ def getData():
 
     if response == "No message found":
         return "No message found"
+
+    if response == "Invalid ID":
+        return "Invalid ID"
     
     print("Printing Response...")
     # print(response)
