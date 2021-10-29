@@ -26,7 +26,13 @@ Run Client Flask App
 First cd to client folder
 
 ```
-python app.py 
+python3 app.py 
+```
+
+#### Running Server App
+
+```
+flask run --host=0.0.0.0 --port=8080
 ```
 
 
