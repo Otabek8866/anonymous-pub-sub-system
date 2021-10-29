@@ -10,7 +10,13 @@ app = Flask(__name__)
 
 
 
-host = "http://18.118.151.217:5000"
+# Hamza Backup
+# host = "http://18.118.151.217:5000"
+
+# Fatima backup
+# host = "http://13.48.78.241"
+
+host = "http://13.53.206.164:8080"
 
 @app.route('/')
 def index():
