@@ -34,7 +34,7 @@ def refine_msg(msg, id):
     size = len(msg)
     chunk_num = int(size/142)
     pointer = 0
-    print("Number of Chunks:", chunk_num)
+    print("Number of Chunks:", chunk_num + 1)
 
     for _ in range(chunk_num):
         chunk = msg[pointer:(pointer+142)]
