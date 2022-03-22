@@ -123,7 +123,7 @@ def get_id():
     #Retrieving the data and sending back to client
     target_data_key = my_list[my_index]
     target_data = database.get(target_data_key)
-    print("Size of the found message:", len(target_data))
+    print("Size of the founded message:", len(target_data))
     
     end = time.time()
     print("Time to process a request: {:.20f}".format(end-start))
