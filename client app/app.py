@@ -20,7 +20,7 @@ host = "http://13.53.206.164:8080"
 
 @app.route('/')
 def index():
-    # making list of pokemons
+    # making list
     lines =[]
     with open("./templates/ids.txt") as f:
         raw_data = f.readlines()
